@@ -42,7 +42,14 @@ export const signin = async (req, res) => {
       return res.status(400).json({ message: 'Email and password are required' });
     }
 
-    const user = await User.findOne({ where: { email } });
+    // const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({
+      where: { email },
+      include: [
+        { model: db.Tenant, attributes: ['id', 'name'] }, // Include Tenant details
+        { model: db.Role, attributes: ['id', 'name'] },   // Include Role details
+      ],
+    });
 
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
@@ -59,7 +66,16 @@ export const signin = async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    res.status(200).json({ message: 'Signin successful', token, user: { id: user.id, email: user.email, role_id: user.role_id } });
+    res.status(200).json({
+       message: 'Signin successful',
+        token,
+         user: {
+           id: user.id,
+           email: user.email,
+           role_id: user.role_id,
+           role_name: user.Role ? user.Role.name : null,
+        }
+      });
 
   } catch (error) {
     res.status(500).json({ message: 'Error signing in', error: error.message });
