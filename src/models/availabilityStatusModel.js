@@ -23,7 +23,7 @@ export default (sequelize, DataTypes) => {
       },
       {
         tableName: "availability_status",
-        timestamps: true, // Enables createdAt and updatedAt
+        timestamps: true, 
         createdAt: "created_at",
         updatedAt: "updated_at",
       }

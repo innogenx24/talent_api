@@ -58,9 +58,9 @@ app.use("/api/industries", industryroutes);
 app.use("/api/bench-status", benchStatusRoutes);
 app.use("/api/rate-types", rateTypeRoutes);
 app.use("/api/currency", currencyRoutes);
-app.use('/api/offboarding-reasons', offBoardingReasonRoutes);  // Set the base URL for the OffBoardingReason routes
+app.use('/api/offboarding-reasons', offBoardingReasonRoutes);
 app.use("/api/availability-status", availabilityStatusRoutes);
-app.use('/api/overall-status', overallStatusRoutes);  // Existing route
+app.use('/api/overall-status', overallStatusRoutes); 
 app.use("/api/sources", sourceRoutes);
 app.use("/api/language-proficiency", languageProficiencyRoutes);
 app.use('/api/interview-statuses', interviewStatusRoutes);
@@ -73,7 +73,6 @@ db.authenticate()
   .then(() => console.log('Database connected successfully'))
   .catch(err => console.log('Database connection failed:', err));
 
-//** Start server **//
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
